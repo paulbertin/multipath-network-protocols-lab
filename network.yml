@@ -1,0 +1,43 @@
+# Virtual networks
+network:
+  drone-router-1: 10.0.10.0/24
+  drone-router-2: 10.0.20.0/24
+  drone-router-3: 10.0.30.0/24
+  drone-router-4: 10.0.40.0/24
+  router-server: 10.0.0.0/24
+  monitoring: 172.0.0.0/24
+
+# Container interfaces
+drone:
+  # Drone-to-Router interfaces
+  eth1: 10.0.10.10
+  eth2: 10.0.20.10
+  eth3: 10.0.30.10
+  eth4: 10.0.40.10
+  # Monitoring interface
+  eth5: 172.0.0.10
+router:
+  # Router-to-Drone interfaces
+  eth1: 10.0.10.20
+  eth2: 10.0.20.20
+  eth3: 10.0.30.20
+  eth4: 10.0.40.20
+  # Router-to-Server interface
+  eth5: 10.0.0.20
+  # Monitoring interface
+  eth6: 172.0.0.20
+server:
+  # Server-to-Router interface
+  eth1: 10.0.0.30
+  # Monitoring interface
+  eth2: 172.0.0.30
+
+# Monitoring services 
+influxdb:
+  eth1: 172.0.0.40
+  guest_port: 8086
+  host_port: 8086
+grafana:
+  eth1: 172.0.0.50
+  guest_port: 3000
+  host_port: 3000

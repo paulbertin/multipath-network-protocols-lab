@@ -1,0 +1,2 @@
+- include_tasks: setup-routes.yml
+  when: ip_route_enabled

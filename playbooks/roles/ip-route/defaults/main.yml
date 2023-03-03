@@ -1,0 +1,2 @@
+# Defaults for ip-route role
+ip_route_enabled: true

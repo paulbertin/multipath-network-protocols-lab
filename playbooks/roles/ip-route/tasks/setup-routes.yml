@@ -1,0 +1,11 @@
+- name: "[{{ ansible_hostname }}] Add static IP routes"
+  become: true
+  shell: "{{ lookup('template', './../scripts/{{ ansible_hostname }}_add_routes.sh.j2') }}"
+  # register: add_route
+  args:
+    creates: /root/.routes_updated
+
+
+
+
+    

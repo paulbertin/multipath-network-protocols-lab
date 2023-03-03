@@ -1,0 +1,11 @@
+# This creates the routes to the four links of the drone
+
+ip route add {{ network['drone-router-1'] }} via {{ router['eth5'] }} dev eth1
+ip route add {{ network['drone-router-2'] }} via {{ router['eth5'] }} dev eth1
+ip route add {{ network['drone-router-3'] }} via {{ router['eth5'] }} dev eth1
+ip route add {{ network['drone-router-4'] }} via {{ router['eth5'] }} dev eth1
+
+# Create an empty file upon execution that allow Ansible 
+# to check if this script has already been run once
+
+touch /root/.routes_updated

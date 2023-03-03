@@ -1,0 +1,4 @@
+# Defaults for mptcp role
+mptcp_enabled: true
+mptcp_already_active: false
+mptcp_subflows: 3

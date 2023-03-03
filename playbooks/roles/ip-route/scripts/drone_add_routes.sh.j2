@@ -1,0 +1,29 @@
+# According to https://multipath-tcp.org/pmwiki.php/Users/ConfigureRouting
+# This creates four different routing tables, that we use based on the source-address.
+
+# Another useful example : https://hpnpl.net/posts/mptcp-ubuntu/
+
+ip rule add from {{ drone['eth1'] }} table 1
+ip rule add from {{ drone['eth2'] }} table 2
+ip rule add from {{ drone['eth3'] }} table 3
+ip rule add from {{ drone['eth4'] }} table 4
+
+# Configure the four different routing tables
+
+ip route add {{ network['drone-router-1'] }} dev eth1 table 1
+ip route add {{ network['drone-router-2'] }} dev eth2 table 2
+ip route add {{ network['drone-router-3'] }} dev eth3 table 3
+ip route add {{ network['drone-router-4'] }} dev eth4 table 4
+
+ip route add {{ server['eth1'] }} via {{ router['eth1'] }} dev eth1 table 1
+ip route add {{ server['eth1'] }} via {{ router['eth2'] }} dev eth2 table 2
+ip route add {{ server['eth1'] }} via {{ router['eth3'] }} dev eth3 table 3
+ip route add {{ server['eth1'] }} via {{ router['eth4'] }} dev eth4 table 4
+
+# Create routes for the default ip routing table
+ip route add {{ network['router-server'] }} via {{ router['eth1'] }} dev eth1
+
+# Create an empty file upon execution that allow Ansible 
+# to check if this script has already been run once
+
+touch /root/.routes_updated

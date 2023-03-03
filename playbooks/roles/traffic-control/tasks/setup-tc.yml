@@ -1,0 +1,5 @@
+- name: "[{{ ansible_hostname }}] Add traffic control rules"
+  become: true
+  shell: "{{ lookup('template', './../scripts/{{ ansible_hostname }}_tc.sh.j2') }}"
+  args:
+    creates: /root/.tc_configured

@@ -1,0 +1,18 @@
+- name: "[{{ ansible_hostname }}] Enable MPTCP"
+  shell: "sysctl -w net.mptcp.enabled=1"
+  become: true
+  changed_when: false
+  when: not mptcp_already_active
+
+- name: "[{{ ansible_hostname }}] Add MPTCP endpoints"
+  become: true
+  shell: "{{ lookup('template', './../scripts/add_endpoints.sh.j2') }}"
+  args:
+    creates: /root/.mptcp_configured
+  when: ansible_hostname == "drone"
+
+- name: "[{{ ansible_hostname }}] Set MPTCP subflow limits"
+  become: true
+  shell: "{{ lookup('template', './../scripts/set_mptcp_limits.sh.j2') }}"
+  args:
+    creates: /root/.mptcp_limits_set

@@ -1,0 +1,7 @@
+# Allow mptcp to create additional paths (subflows)
+ip mptcp limits set subflow {{ mptcp_subflows }}
+
+# Create an empty file upon execution that allow Ansible 
+# to check if this script has already been run once
+
+touch /root/.mptcp_limits_set

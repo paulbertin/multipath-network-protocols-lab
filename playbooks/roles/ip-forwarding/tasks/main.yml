@@ -1,0 +1,2 @@
+- include_tasks: ip-forwarding.yml
+  when: ip_forwarding_enabled and not forwarding_already_active

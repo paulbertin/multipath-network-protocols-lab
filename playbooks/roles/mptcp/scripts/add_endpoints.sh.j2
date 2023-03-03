@@ -1,0 +1,9 @@
+# Add mptcp endpoints, these are used to create additional paths
+ip mptcp endpoint add {{ drone['eth2'] }} dev eth2 subflow
+ip mptcp endpoint add {{ drone['eth3'] }} dev eth3 subflow
+ip mptcp endpoint add {{ drone['eth4'] }} dev eth4 subflow
+
+# Create an empty file upon execution that allow Ansible 
+# to check if this script has already been run once
+
+touch /root/.mptcp_endpoints_added

@@ -1,0 +1,30 @@
+- name: Configure IP routes
+  hosts: drone,router,server
+  roles:
+    - role: ip-route
+  vars_files:
+    - ./../network.yml
+
+- name: Enable IP forwarding
+  hosts: router
+  roles:
+    - role: ip-forwarding
+  vars:                               # Skip ip-forwarding role (already enabled on Docker host)
+    forwarding_already_active: true   # Disable this if you plan to move to VMs instead of containers
+
+- name: Configure MPTCP
+  hosts: drone,server
+  roles:
+    - role: mptcp
+  vars:
+    mptcp_already_active: true        # Disable this if you plan to move to VMs instead of containers
+    mptcp_subflows: 3                 # Set to 0 for single-path TCP
+  vars_files:
+    - ./../network.yml
+
+- name: Configure Traffic Control
+  hosts: drone,router
+  roles:
+    - role: traffic-control
+  vars_files:
+    - ./../network.yml

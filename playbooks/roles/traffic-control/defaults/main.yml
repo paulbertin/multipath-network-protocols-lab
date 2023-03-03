@@ -1,0 +1,10 @@
+# Defaults for traffic-control role
+tc_enabled: true
+
+# A comprehensive list of tc command parameters can be found here:
+# https://wiki.linuxfoundation.org/networking/netem
+tc_rate: 1mbit
+tc_delay: 20ms
+tc_delay_jitter: 10ms
+tc_delay_correlation: 25%
+tc_loss: 0.1%                     # Better add loss on router-side rather than locally

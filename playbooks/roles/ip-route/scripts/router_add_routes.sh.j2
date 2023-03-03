@@ -1,0 +1,12 @@
+# This creates routes to forward traffic between the drone and the server
+
+ip route replace {{ network['drone-router-1'] }} via {{ drone['eth1'] }} dev eth1
+ip route replace {{ network['drone-router-2'] }} via {{ drone['eth2'] }} dev eth2
+ip route replace {{ network['drone-router-3'] }} via {{ drone['eth3'] }} dev eth3
+ip route replace {{ network['drone-router-4'] }} via {{ drone['eth4'] }} dev eth4
+ip route replace {{ network['router-server'] }} via {{ server['eth1'] }} dev eth5
+
+# Create an empty file upon execution that allow Ansible 
+# to check if this script has already been run once
+
+touch /root/.routes_updated
