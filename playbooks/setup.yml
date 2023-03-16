@@ -28,3 +28,8 @@
     - role: traffic-control
   vars_files:
     - ./../network.yml
+
+- name: Copy forwarders
+  hosts: drone,server
+  roles:
+    - role: forwarders
