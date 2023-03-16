@@ -1,9 +1,9 @@
-# Defaults for traffic-control role
-tc_enabled: true
-tc_already_setup: false
-
-# A comprehensive list of tc command parameters can be found here:
+# A list of tc command parameters can be found here:
 # https://wiki.linuxfoundation.org/networking/netem
+tc_already_setup: true
+
+# This scenario add a 100ms delay (with a 10ms jitter)
+# and limit the bandwidth to 1mbit to all interfaces.
 tc_rate: 
   eth1: 1mbit
   eth2: 1mbit
@@ -24,5 +24,9 @@ tc_delay_correlation:
   eth2: 25%
   eth3: 25%
   eth4: 25%
-tc_loss: 
-  eth5: 0.1%                     # Better add loss on router-side rather than locally
+tc_loss:
+  eth1: 0%
+  eth2: 25%
+  eth3: 25%
+  eth4: 25%
+  eth5: 0%      # router interface

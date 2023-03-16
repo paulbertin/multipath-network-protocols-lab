@@ -1,4 +1,5 @@
 FROM ubuntu:22.04
+SHELL ["/bin/bash", "-c"]
 ENV DEBIAN_FRONTEND noninteractive
 
 # Set influxdb token
@@ -60,6 +61,7 @@ RUN mkdir -p /home/vagrant/.ssh \
     && chmod 0600 /home/vagrant/.ssh/authorized_keys \
     && chown -R vagrant /home/vagrant/.ssh
 
+# Switch to the vagrant user
 USER vagrant
 
 # Update rust
@@ -67,6 +69,16 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y \
     && echo "source $HOME/.cargo/env" >> /home/vagrant/.bashrc \
     && echo "export DISPLAY=:1" >> /home/vagrant/.bashrc 
 
+# Clone quic-forwarder repository
+RUN cd /home/vagrant \
+    && git clone https://github.com/imt-atlantique-procom/quic_forwarder.git
+
+# Build quic-forwarder with cargo
+RUN cd /home/vagrant/quic_forwarder \
+    && source $HOME/.cargo/env \
+    && cargo build
+
+# Switch back to root
 USER root
 
 # Don't clean packages, we might be using vagrant-cachier
