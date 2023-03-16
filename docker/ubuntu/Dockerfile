@@ -33,10 +33,12 @@ RUN apt-get install -y \
     git \
     cmake \
     build-essential \
+    cargo \
+    netcat \
+    net-tools \
+    ffmpeg \
+    && apt remove rustc -y \
     && rm -rf /var/lib/apt/lists/*
-
-# Update rust
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y 
 
 # Ensure we have the fr_FR.UTF-8 locale available
 RUN locale-gen fr_FR.UTF-8
@@ -57,6 +59,15 @@ RUN mkdir -p /home/vagrant/.ssh \
       -O /home/vagrant/.ssh/authorized_keys \
     && chmod 0600 /home/vagrant/.ssh/authorized_keys \
     && chown -R vagrant /home/vagrant/.ssh
+
+USER vagrant
+
+# Update rust
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y \
+    && echo "source $HOME/.cargo/env" >> /home/vagrant/.bashrc \
+    && echo "export DISPLAY=:1" >> /home/vagrant/.bashrc 
+
+USER root
 
 # Don't clean packages, we might be using vagrant-cachier
 RUN rm /etc/apt/apt.conf.d/docker-clean

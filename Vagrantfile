@@ -60,7 +60,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         config.vm.provider "docker" do |d|
             d.name = "server"
             d.image = "vagrant-ubuntu-22.04"
-            d.create_args = ["--hostname", "server", "--cap-add=NET_ADMIN"]
+            d.create_args = ["--hostname", "server", "--cap-add=NET_ADMIN", "-v", "/tmp/.X11-unix/:/tmp/.X11-unix/", "-e", "DISPLAY=$DISPLAY", "--ipc=host"]
             d.env = {"INFLUXDB_IP" => net['influxdb']['eth1']}
         end
     end
