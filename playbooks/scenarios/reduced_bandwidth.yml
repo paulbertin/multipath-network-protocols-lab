@@ -1,5 +1,6 @@
 # A list of tc command parameters can be found here:
 # https://wiki.linuxfoundation.org/networking/netem
+tc_already_setup: true
 
 # This scenario add a 100ms delay (with a 10ms jitter)
 # and limit the bandwidth to 1mbit to all interfaces.

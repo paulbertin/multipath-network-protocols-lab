@@ -29,4 +29,4 @@ tc_loss:
   eth2: 0%
   eth3: 0%
   eth4: 0%
-  eth5: 0.1%
+  eth5: 0.1%                  # Better add loss on router-side rather than locally
