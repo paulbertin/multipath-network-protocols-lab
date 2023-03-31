@@ -1,3 +1,6 @@
+<a name="readme-top"></a>
+
+<!-- PROJECT TITLE -->
 <h1 align="center">
 Multipath Network Protocols Lab
 </h1>
@@ -150,7 +153,7 @@ Most applications do not support multipath natively and require development to e
 ![](images/demo.webp)
 
 This demo implies that the virtual environment is already deployed and running. It features:
-* TCP application traffic proxying via MPTCP or MPQUIC (sections [A](#a-proxying-using-mptcp) or [B](#b-proxying-using-mpquic)).
+* TCP application traffic proxying via MPTCP or MPQUIC (sections [A)](#a-proxying-using-mptcp) or [B)](#b-proxying-using-mpquic)).
 * Traffic generation using `ffmpeg` application for live video streaming from `drone` to `server` container.
 * Real-time per-interface network bandwidth usage visualization on Grafana.
 
@@ -210,7 +213,7 @@ vagrant ssh drone
 ./mpquic_forwarder/start_client_demo.sh
 ```
 
-> **Note:** By default, MPQUIC proxy on `drone` container listen for TCP connection on 127.0.0.1:1111. You can change the listening address by replacing the `listen_addr` value at **line 268** in the [mpquic_forwarder/src/client.rs](https://github.com/imt-atlantique-procom/mpquic_forwarder/blob/main/src/client.rs) file. 
+> **Note:** By default, MPQUIC proxy on `drone` container listen for TCP connection on 127.0.0.1:1111. You can change the listening address by replacing the `listen_addr` value at **line 268** in [mpquic_forwarder/src/client.rs](https://github.com/imt-atlantique-procom/mpquic_forwarder/blob/main/src/client.rs). 
 > Alternatively, use this one liner to replace the value: `sed -i "s/127.0.0.1/<drone_eth0_ipaddr>/g" mpquic_forwarder/src/client.rs`	
 
 </details>
@@ -250,13 +253,13 @@ The above instruction executes `ffmpeg` on the host machine to access the laptop
 
 ### Modifying Network Conditions
 
-Using network emulation (NetEm), this testbed allows emulating different network conditions on each of the four interfaces used for multipath on `drone`.
+Using Network Emulator ([NetEm](https://man7.org/linux/man-pages/man8/tc-netem.8.html)), this testbed allows emulating different network conditions on each of the four interfaces used for multipath on `drone`.
 
 > By default, when the environment is deployed, homogeneous network conditions are applied on all interfaces. This set a 40ms RTT, 1 mbps bandwidth and 0% packet loss (see defaults values in [traffic_control/default/main.yml](./playbooks/roles/traffic-control/defaults/main.yml)).
 
 #### Defining new scenarios using variables files
 
-One can modify the existing scenarios or create new ones. Some example scenarios are provided in the [playbooks/scenarios](./playbooks/scenarios/) folder. These are YAML files defining variables for every `tc netem` parameters applied on each network interfaces.
+One can modify the existing scenarios or create new ones. Some example scenarios are provided in the [playbooks/scenarios](./playbooks/scenarios/) folder. These are YAML files defining variables for every `tc-netem` parameters applied on each network interfaces.
 
 
 <details><summary>Show example</summary>
