@@ -1,0 +1,32 @@
+# A list of tc command parameters can be found here:
+# https://wiki.linuxfoundation.org/networking/netem
+tc_already_setup: true
+
+# This scenario add a 20ms delay (with a 10ms jitter)
+# and limit the bandwidth to 1mbit to all interfaces.
+tc_rate: 
+  eth1: 1mbit
+  eth2: 1mbit
+  eth3: 1mbit
+  eth4: 1mbit
+tc_delay:
+  eth1: 20ms
+  eth2: 20ms
+  eth3: 20ms
+  eth4: 20ms
+tc_delay_jitter:
+  eth1: 10ms
+  eth2: 10ms
+  eth3: 10ms
+  eth4: 10ms
+tc_delay_correlation: 
+  eth1: 25%
+  eth2: 25%
+  eth3: 25%
+  eth4: 25%
+tc_loss: 
+  eth1: 0%
+  eth2: 0%
+  eth3: 0%
+  eth4: 0%
+  eth5: 0.1%                  # Better add loss on router-side rather than locally

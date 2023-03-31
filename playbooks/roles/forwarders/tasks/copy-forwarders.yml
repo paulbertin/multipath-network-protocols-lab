@@ -1,0 +1,10 @@
+- name: "[{{ ansible_hostname }}] Copy forwarders"
+  become: true
+  copy:
+    src: "{{ item }}"
+    dest: "/home/vagrant/mptcp-forwarders/"
+    owner: vagrant
+    group: vagrant
+    mode: 0744
+  with_items:
+    - "{{ forwarders }}"

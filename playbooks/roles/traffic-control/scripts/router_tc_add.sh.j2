@@ -1,0 +1,11 @@
+
+tc qdisc add dev eth1 root netem rate {{ tc_rate['eth1'] }} delay {{ tc_delay['eth1'] }} {{ tc_delay_jitter['eth1'] }} {{ tc_delay_correlation['eth1'] }}
+tc qdisc add dev eth2 root netem rate {{ tc_rate['eth2'] }} delay {{ tc_delay['eth2'] }} {{ tc_delay_jitter['eth2'] }} {{ tc_delay_correlation['eth2'] }} 
+tc qdisc add dev eth3 root netem rate {{ tc_rate['eth3'] }} delay {{ tc_delay['eth3'] }} {{ tc_delay_jitter['eth3'] }} {{ tc_delay_correlation['eth3'] }}
+tc qdisc add dev eth4 root netem rate {{ tc_rate['eth4'] }} delay {{ tc_delay['eth4'] }} {{ tc_delay_jitter['eth4'] }} {{ tc_delay_correlation['eth4'] }}
+tc qdisc add dev eth5 root netem loss {{ tc_loss['eth5'] }}
+
+# Create an empty file upon execution that allow Ansible 
+# to check if this script has already been run once
+
+touch /root/.tc_configured

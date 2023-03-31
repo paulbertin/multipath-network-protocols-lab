@@ -1,0 +1,6 @@
+- name: Change Traffic Control scenario
+  hosts: drone,router
+  roles:
+    - role: traffic-control
+  vars_files:
+    - ./scenarios/default.yml

@@ -25,7 +25,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 6,
   "links": [],
   "liveNow": true,
   "panels": [
@@ -396,11 +395,11 @@
           "selected": true,
           "text": [
             "drone",
-            "router"
+            "server"
           ],
           "value": [
             "drone",
-            "router"
+            "server"
           ]
         },
         "datasource": {
@@ -425,16 +424,16 @@
         "current": {
           "selected": true,
           "text": [
-            "eth0",
             "eth1",
             "eth2",
-            "eth3"
+            "eth3",
+            "eth4"
           ],
           "value": [
-            "eth0",
             "eth1",
             "eth2",
-            "eth3"
+            "eth3",
+            "eth4"
           ]
         },
         "datasource": {
@@ -479,6 +478,6 @@
   "timezone": "",
   "title": "Network Statistics",
   "uid": "FTbBykxVzdsfdsfsdf",
-  "version": 4,
+  "version": 1,
   "weekStart": ""
 }

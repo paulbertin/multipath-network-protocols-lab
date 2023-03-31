@@ -1,0 +1,5 @@
+# Defaults for forwarders role
+copy_forwarders: true
+forwarders:
+ - "scripts/mptcp-tcp-forwarder.py"
+ - "scripts/tcp-mptcp-forwarder.py"
